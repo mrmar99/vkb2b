@@ -4,9 +4,11 @@
 
 [Нажми на меня](https://vkb2b.vercel.app/)
 
+![гифка]()
+
 ## Информация
 
-Форма реализована с помощью `React & TypeScript`.
+Форма реализована на `React & TypeScript`.
 
 Использована библиотека компонентов `Ant Design`.
 Библиотека `dayjs` нужна для корректной работы `DatePicker` и `TimePicker`.
