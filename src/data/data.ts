@@ -1,15 +1,15 @@
-type Tower = {
+interface Tower {
   id: string;
   name: string;
 };
 
-type Floor = {
+interface Floor {
   id: string;
   towerId: string;
   level: number;
 };
 
-type Room = {
+interface Room {
   towerId: string;
   floorId: string;
   number: number;
