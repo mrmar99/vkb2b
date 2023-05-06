@@ -14,8 +14,8 @@ type Props = {};
 
 const MyForm = (props: Props) => {
   const [towersOptions, setTowersOptions] = useState<{ value: string; label: string }[]>([]);
-  const [floorsOptions, setFloorsOptions] = useState<{ value: string; label: string }[]>([]);
-  const [roomsOptions, setRoomsOptions] = useState<{ value: number; label: string }[]>([]);
+  const [floorsOptions, setFloorsOptions] = useState<{ value: string; label: number }[]>([]);
+  const [roomsOptions, setRoomsOptions] = useState<{ value: number; label: number }[]>([]);
 
 	const [towerValue, setTowerValue] = useState<string | null>(null);
 	const [floorValue, setFloorValue] = useState<string | null>(null);
@@ -45,7 +45,7 @@ const MyForm = (props: Props) => {
       .map(({ id, level }) => {
         return {
           value: id,
-          label: `${level} этаж "${towersData[value].name}"`,
+          label: level,
         };
       });
 
@@ -65,7 +65,7 @@ const MyForm = (props: Props) => {
         const level = floorsData[value].level;
         return {
           value: number,
-          label: `Переговорная ${number} на ${level} этаже`,
+          label: number,
         };
       });
 
@@ -74,7 +74,7 @@ const MyForm = (props: Props) => {
     }
 
     setRoomsOptions(rooms);
-    setFloorValue(floorsData[value].level.toString());
+    setFloorValue(value);
   };
 
 	const onDateChange = (value: Dayjs | null) => {
@@ -126,8 +126,8 @@ const MyForm = (props: Props) => {
 
 	const onFinish = () => {
 		const formData = {
-			tower: towerValue,
-			floor: floorValue,
+			tower: towerValue && towersData[towerValue].name,
+			floor: floorValue && floorsData[floorValue].level,
 			room: roomValue,
 			date: dateValue,
 			timerange: timeValue,
@@ -146,6 +146,7 @@ const MyForm = (props: Props) => {
   return (
     <div className="form-container">
       <Form layout="vertical" onFinish={onFinish}>
+				<span className="form-header">Бронирование переговорной</span>
         <Form.Item label="Башня" rules={[{ required: true, message: 'Выберите башню!' }]}>
 					<Select
 						style={{
@@ -204,10 +205,10 @@ const MyForm = (props: Props) => {
 					</Form.Item>
         </ConfigProvider>
 				<Form.Item label="Комментарий">
-					<Input.TextArea style={{ height: 100 }} value={commentValue} onChange={({ target }) => setCommentValue(target.value)} />
+					<Input.TextArea value={commentValue} onChange={({ target }) => setCommentValue(target.value)} />
 				</Form.Item>
 				<Form.Item>
-					<Button disabled={!isSubmitDisabled()} type="primary" htmlType="submit" style={{ width: '100%', marginTop: 16 }}>
+					<Button disabled={!isSubmitDisabled()} type="primary" htmlType="submit" style={{ width: '100%' }}>
 						Забронировать
 					</Button>
 				</Form.Item>
