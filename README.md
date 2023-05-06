@@ -4,7 +4,7 @@
 
 [Нажми на меня](https://vkb2b.vercel.app/)
 
-![гифка]()
+![гифка](https://github.com/mrmar99/vkb2b/blob/main/demo.gif)
 
 ## Информация
 
